@@ -52,6 +52,15 @@ def find_one(folder,name):
  if not hits:raise FileNotFoundError('ملف تشغيل مفقود: '+name)
  return hits[0]
 def bundle_hash():return digest(BUNDLE/'source-files.json')
+def check_embedded_bundle():
+ manifest=json.loads((BUNDLE/'source-files.json').read_text(encoding='utf-8'))
+ root=(BUNDLE/'source').resolve();errors=[]
+ for name,sha in manifest.items():
+  file=(root/name).resolve()
+  if not file.is_relative_to(root)or not file.is_file()or digest(file)!=sha:errors.append(name)
+ for name in ('models.json','node.json','requirements-windows.txt'):
+  if not(BUNDLE/'packaging'/name).is_file():errors.append('packaging/'+name)
+ return {'ok':not errors,'source_files':len(manifest),'errors':errors,'network_used':False}
 def profile_current(profile):
  return profile.get('source_sha256')==bundle_hash() and all(Path(profile.get(k,'missing')).is_file()for k in ('python','node','chrome','codex'))
 def running_server():
@@ -64,6 +73,7 @@ def running_server():
 
 def provision():
  if os.name!='nt':raise RuntimeError('هذه حزمة Windows فقط')
+ if not check_embedded_bundle()['ok']:raise RuntimeError('ملفات البرنامج غير مكتملة؛ أعد تنزيل ملف التشغيل من الإصدار الرسمي')
  if running_server():raise RuntimeError('نسخة محلية تعمل الآن. أوقفها بعد انتهاء شغلها قبل تركيب إصدار مختلف')
  APP_HOME.mkdir(parents=True,exist_ok=True);CACHE.mkdir(exist_ok=True);DATA.mkdir(exist_ok=True)
  if shutil.disk_usage(APP_HOME).free<20*1024**3:raise ValueError('التجهيز يحتاج ٢٠ جيجابايت مساحة متاحة على الأقل')
@@ -151,4 +161,7 @@ def main():
   except queue.Empty:pass
   window.after(200,poll)
  threading.Thread(target=work,daemon=True).start();window.after(200,poll);window.mainloop()
-if __name__=='__main__':main()
+if __name__=='__main__':
+ if len(sys.argv)==3 and sys.argv[1]=='--check-bundle':
+  result=check_embedded_bundle();Path(sys.argv[2]).write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf-8');sys.exit(0 if result['ok']else 1)
+ main()

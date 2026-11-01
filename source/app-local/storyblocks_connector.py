@@ -154,8 +154,9 @@ def selected(store, project, revision, options):
 def private_write(path, value):
     temp = path.with_suffix('.tmp')
     fd = os.open(temp, os.O_CREAT | os.O_WRONLY | os.O_TRUNC, 0o600)
-    with os.fdopen(fd, 'w') as stream:
-        os.fchmod(stream.fileno(), 0o600)
+    with os.fdopen(fd, 'w', encoding='utf-8') as stream:
+        if os.name != 'nt':
+            os.fchmod(stream.fileno(), 0o600)
         json.dump(value, stream, ensure_ascii=False); stream.flush(); os.fsync(stream.fileno())
     os.replace(temp, path)
 

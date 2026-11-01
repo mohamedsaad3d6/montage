@@ -28,13 +28,23 @@ jobs:
         run: |
           $env:PYTHONPATH = "source/app-local;source/app-local/tests;source/engine"
           $env:PYTHONUTF8 = "1"
-          python -m unittest test_dispatcher test_queue test_process_guard test_runtime_contract test_output_status test_workflow test_codex_agent test_codex_sources test_storyblocks_auto test_storyblocks_connector -v
+          python -m unittest test_dispatcher test_queue test_process_guard test_runtime_contract test_output_status test_workflow test_codex_agent test_codex_sources test_storyblocks_auto test_storyblocks_connector test_service_links -v
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           node --test source/app-local/tests/test-workflow-view.mjs source/app-local/tests/test-work-progress.mjs
           exit $LASTEXITCODE
       - name: Build executable
         shell: cmd
         run: packaging\build-windows.cmd
+      - name: Verify packaged executable and embedded source
+        shell: pwsh
+        run: |
+          $report = Join-Path $env:RUNNER_TEMP "montaj-bundle-check.json"
+          $process = Start-Process -FilePath "dist/Montaj-Setup.exe" -ArgumentList @("--check-bundle", $report) -PassThru
+          if (-not $process.WaitForExit(120000)) { $process.Kill(); throw "Packaged application did not finish its offline check" }
+          if ($process.ExitCode -ne 0) { throw "Packaged application check failed" }
+          $result = Get-Content $report -Raw | ConvertFrom-Json
+          if (-not $result.ok -or $result.source_files -lt 400) { throw "Embedded source inventory did not match" }
+          Get-Content $report
       - uses: actions/upload-artifact@v4
         with:
           name: Montaj-Windows-acceptance-candidate

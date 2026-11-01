@@ -107,8 +107,9 @@ def save_storyblocks(s,data):
  out['test_only']=True;STORYBLOCKS.parent.mkdir(parents=True,exist_ok=True);os.chmod(STORYBLOCKS.parent,0o700)
  temporary=STORYBLOCKS.with_suffix('.tmp');fd=os.open(str(temporary),os.O_CREAT|os.O_WRONLY|os.O_TRUNC,0o600)
  try:
-  os.fchmod(fd,0o600)
-  with os.fdopen(fd,'w')as f:json.dump(out,f)
+  with os.fdopen(fd,'w',encoding='utf-8')as f:
+   if os.name!='nt':os.fchmod(f.fileno(),0o600)
+   json.dump(out,f)
   os.replace(temporary,STORYBLOCKS)
  except Exception:
   if temporary.exists():temporary.unlink()
