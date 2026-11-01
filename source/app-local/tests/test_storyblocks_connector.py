@@ -1,4 +1,4 @@
-import json,sys,tempfile,unittest
+import json,os,sys,tempfile,unittest
 from pathlib import Path
 from unittest.mock import patch,MagicMock
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
@@ -38,7 +38,8 @@ class Storyblocks(unittest.TestCase):
   with patch.object(sb,'Connector',return_value=c):
    with self.assertRaises(Invalid):sb.collect(self.s,self.rev,self.folder,self.options)
    with self.assertRaises(Conflict):sb.collect(self.s,self.rev,self.folder,self.options)
-  receipt=next((self.s.root/'storyblocks-receipts').glob('*.json'));self.assertEqual(json.loads(receipt.read_text())['state'],'needs_reconciliation');self.assertEqual(receipt.stat().st_mode&0o777,0o600);self.assertEqual(c.call.call_count,2)
+  receipt=next((self.s.root/'storyblocks-receipts').glob('*.json'));self.assertEqual(json.loads(receipt.read_text())['state'],'needs_reconciliation');self.assertEqual(c.call.call_count,2)
+  if os.name!='nt':self.assertEqual(receipt.stat().st_mode&0o777,0o600)
  def test_licensed_file_import_is_not_automatic_editorial_approval(self):
   c=self.client();url='https://cdn.cloudfront.net/original.mp4?Signature=private'
   c.call.side_effect=[{'download_formats':{'MP4':{}}},{'download_url':url}]

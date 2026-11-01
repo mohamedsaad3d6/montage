@@ -133,7 +133,7 @@
   "app-local/tests/test_script_plan.py": "71e3cc84117c6874d5c75c698b96cf46c49deb2b9fc235204a8f94c3784eaf42",
   "app-local/tests/test_service_links.py": "14670e657f9edde598b0d3bb4ff7c3ba0f9b6c987198cef0c21501d73217e8ee",
   "app-local/tests/test_storyblocks_auto.py": "9e433fa98b8de976698b126bdf8ef3e0d3168c0654e6c570e2411a136ebabc78",
-  "app-local/tests/test_storyblocks_connector.py": "bfe316f59c59bad71a7aff105516bcc9c884f41fc4e0d7836eb3874d94a694fa",
+  "app-local/tests/test_storyblocks_connector.py": "2df1e080645c19bc3a19a067f8d92481ce1c95ef6e795a9dce76ed4bafe0ef6d",
   "app-local/tests/test_studio.py": "612ced904400184f53a64cdd54d11d0bf80b593227140f4fc4f533bade13f71b",
   "app-local/tests/test_take_assessment.py": "d87137b56a5ea98868aa95ab40b26081c0d80a2c270720b082060f0c6b5d8aec",
   "app-local/tests/test_take_repair.py": "22ee1187a23dfb1b4c60d14808296377a3e12ac26ff99ec52c7e3c26f09f1211",
