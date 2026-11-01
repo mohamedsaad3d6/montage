@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>مونتاج — مساحة المراجعة</title>
+  <style>
+    html,body,iframe{width:100%;height:100%;margin:0;border:0;background:#0b1018}
+  </style>
+</head>
+<body>
+  <iframe id="montaj-app" title="تطبيق مونتاج" src="montaj-app.html"></iframe>
+  <script>
+    const frame = document.querySelector('#montaj-app');
+
+    const mountReview = () => {
+      const doc = frame.contentDocument;
+      if (!doc || !doc.querySelector('#review') || doc.querySelector('.review-integrated')) return;
+      const style = doc.createElement('style');
+      style.textContent = `
+        :root{--bg:#0d1420;--side:#101a28;--card:#162235;--card2:#1a2a40;--line:#2a3c54;--ink:#eaf1f8;--muted:#92a2b5;--blue:#5da9e9;--mint:#70c99a;--gold:#f3b45b;--coral:#e87962;--purple:#9e7ad0}
+        body{background:radial-gradient(circle at 70% -10%,#1c3550 0,transparent 35%),var(--bg)}
+        .side{background:linear-gradient(180deg,#111d2d,#0e1724);box-shadow:-12px 0 28px #02060d40}
+        .logo{display:flex;align-items:center;gap:9px;color:#f6c46e;font-family:Tahoma,Arial,sans-serif;font-size:25px;letter-spacing:.2px;line-height:1}.logo b{color:#f6c46e}.logo small{position:absolute;right:14px;top:49px;color:#8193a9;font-family:Tahoma,Arial,sans-serif;font-size:10px;letter-spacing:0}.montaj-mark{width:31px;height:31px;display:grid;place-items:center;flex:0 0 31px;filter:drop-shadow(0 4px 8px #0008)}
+        .nav button{border:1px solid transparent;border-radius:11px;padding:11px 12px;transition:background .18s,border-color .18s,transform .18s}
+        .nav button:hover{background:#1a2b42;border-color:#2f4966;transform:translateX(-2px)}
+        .nav button.active{background:linear-gradient(135deg,#2b3543,#1d2a3c);border:1px solid var(--gold);box-shadow:inset 0 0 0 1px #f3b45b33,0 5px 14px #050b1426;color:#fff4df}
+        .top{height:48px;padding-top:2px}.btn{border-radius:10px;background:#1a2a40;border-color:#344c69;box-shadow:0 5px 14px #06101c22;transition:transform .18s,box-shadow .18s,background .18s}.btn:hover{transform:translateY(-1px);background:#213650;box-shadow:0 8px 18px #06101c44}.btn.primary{background:linear-gradient(135deg,#f7c46f,#eaa34d);border-color:#f7c46f;color:#211607;font-weight:700}
+        .card{background:linear-gradient(145deg,#18263a,#142033);border-color:#2b405a;border-radius:16px;box-shadow:0 10px 28px #050b1426}.badge{background:#132034;border-color:#314a67;border-radius:99px}.pagehead h1{letter-spacing:-.3px}.pagehead p{max-width:600px}
+        .main{padding-bottom:28px!important}
+        footer.timeline{display:none!important}
+        #review .review-integrated{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:18px;align-items:start}
+        .review-stage{min-width:0;border:1px solid #263445;border-radius:16px;background:#111a26;overflow:hidden}
+        .stage-header,.clean-transport,.tl-header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 15px;border-bottom:1px solid #263445;color:#dce6f1}
+        .stage-header strong{font-size:14px}.stage-header span,.tl-header span{font-size:12px;color:#90a0b4}
+        .clean-viewer{height:300px;display:grid;place-items:center;background:radial-gradient(circle at 55% 25%,#314b63 0,#152333 35%,#090f17 78%);position:relative}
+        .clean-viewer:before{content:"";position:absolute;inset:18% 15%;border-radius:12px;background:linear-gradient(125deg,#365d72,#172436 52%,#0a1119);opacity:.82}
+        .play{position:relative;z-index:1;width:58px;height:58px;border:0;border-radius:50%;background:#f4b35b;color:#17120a;font-size:22px;cursor:pointer}
+        .clean-transport{border-top:1px solid #263445;border-bottom:0}.time{font-family:ui-monospace,monospace;color:#6fb6ff;font-size:13px}.transport-actions{display:flex;gap:8px}.transport-actions button,.mode-tabs button,.prompt-send{border:1px solid #33465c;border-radius:8px;background:#172333;color:#dce6f1;padding:7px 10px;cursor:pointer;font:inherit;font-size:12px}.transport-actions button:hover,.mode-tabs button:hover{border-color:#6fb6ff}
+        .edit-timeline{border-top:1px solid #263445;background:#0d141e;padding-bottom:12px}.tl-header{padding:10px 15px}.tl-scale{display:flex;justify-content:space-between;padding:8px 18px 5px 94px;color:#78899d;font:11px ui-monospace,monospace}.track{display:grid;grid-template-columns:76px 1fr;min-height:40px;border-top:1px solid #202c3b;position:relative}.track-label{display:flex;align-items:center;gap:7px;padding:0 12px;color:#aebdcd;font-size:12px;border-left:1px solid #263445}.track-label b{font-size:11px;color:#6fb6ff}.lane{display:flex;gap:4px;align-items:center;padding:6px 10px;position:relative;overflow:hidden}.clip{height:26px;border-radius:5px;padding:6px 9px;box-sizing:border-box;color:#dfeeff;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.picture{background:#285f86}.textclip{background:#87542e}.voice{background:#176466}.music{background:#67487e}.graphic{background:#4e6178}.playhead{position:absolute;top:-8px;bottom:-8px;width:2px;background:#77b9ff;right:47%;z-index:2}.playhead:before{content:"";position:absolute;top:0;right:-5px;border-left:6px solid transparent;border-right:6px solid transparent;border-top:8px solid #77b9ff}
+        .edit-panel{border:1px solid #263445;border-radius:16px;background:#111a26;overflow:hidden}.panel-title{padding:15px;font-size:14px;font-weight:700;border-bottom:1px solid #263445}.mode-tabs{display:grid;grid-template-columns:repeat(2,1fr);gap:7px;padding:12px}.mode-tabs button.is-active{background:#254b6c;border-color:#6fb6ff;color:#fff}.control-group{padding:0 14px 14px}.control-group h4{margin:6px 0 10px;color:#9fb0c3;font-size:12px}.control-row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #202c3b;color:#d9e5ef;font-size:12px}.control-row span:last-child{color:#7ebdff}.prompt-box{margin:0 14px 14px;padding:12px;border:1px solid #33465c;border-radius:10px;background:#0d141e}.prompt-box label{display:block;margin-bottom:8px;font-size:12px;color:#e4edf5}.prompt-box textarea{width:100%;min-height:68px;box-sizing:border-box;resize:vertical;border:1px solid #33465c;border-radius:8px;background:#101b29;color:#e8f0f7;padding:9px;font:inherit;font-size:12px}.prompt-foot{display:flex;gap:8px;align-items:center;margin-top:8px}.prompt-send{background:#f4b35b;color:#1b1308;border-color:#f4b35b}.prompt-note{font-size:10px;color:#8293a7;line-height:1.45}.saved-note{min-height:16px;margin-top:7px;color:#83d3ad;font-size:11px}
+        @media(max-width:980px){#review .review-integrated{grid-template-columns:1fr}.clean-viewer{height:250px}.edit-panel{display:grid;grid-template-columns:1fr 1fr}.panel-title{grid-column:1/-1}.prompt-box{grid-column:1/-1}}
+        @media(max-width:620px){.edit-panel{display:block}.tl-scale{padding-right:84px}.track{grid-template-columns:64px 1fr}.track-label{padding:0 7px}.clean-viewer{height:210px}}
+      `;
+      doc.head.appendChild(style);
+
+      const review = doc.querySelector('#review');
+      if (!review) return;
+      const brand = doc.querySelector('.logo');
+      if (brand) brand.innerHTML = `<span class="montaj-mark" aria-hidden="true"><svg viewBox="0 0 32 32" width="31" height="31" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="4" width="28" height="24" rx="8" fill="#192b40" stroke="#F3B45B" stroke-width="1.5"/><path d="M9 10.5H12M9 15.8H12M9 21.2H12" stroke="#F3B45B" stroke-width="1.5" stroke-linecap="round"/><path d="M15 10.5H23M15 15.8H20M15 21.2H23" stroke="#F7CF8C" stroke-width="1.5" stroke-linecap="round"/><path d="M22.6 13.5L26 16L22.6 18.5V13.5Z" fill="#F3B45B"/></svg></span><b>مونتاج</b><small>مساحة إنتاج ومراجعة محلية</small>`;
+      review.innerHTML = `
+        <div class="pagehead">
+          <div><h1>المراجعة والتعديل</h1><p>عدّل النسخة المقترحة من مكان واحد، ثم صدّر عندما تكون جاهزًا.</p></div>
+          <button class="primary">تصدير نسخة للمراجعة</button>
+        </div>
+        <div class="review-integrated">
+          <section class="review-stage" aria-label="معاينة وتايملاين">
+            <div class="stage-header"><strong>نسخة: رحلة إلى واحة سيوة</strong><span>مسودة 03 · 00:01:42</span></div>
+            <div class="clean-viewer"><button class="play" aria-label="تشغيل المعاينة">▶</button></div>
+            <div class="clean-transport"><span class="time">00:00:38:12</span><div class="transport-actions"><button>⏮</button><button>⏸</button><button>⏭</button><button>⛶</button></div><span>HD · 16:9</span></div>
+            <div class="edit-timeline">
+              <div class="tl-header"><strong>التايملاين</strong><span>اضغط على أي مسار لتظهر أدواته</span></div>
+              <div class="tl-scale"><span>00:00</span><span>00:20</span><span>00:40</span><span>01:00</span><span>01:20</span><span>01:42</span></div>
+              <div class="track"><div class="track-label"><b>V1</b> الصورة</div><div class="lane"><i class="playhead"></i><div class="clip picture" style="width:36%">لقطة الافتتاح</div><div class="clip picture" style="width:29%">الواحة</div><div class="clip picture" style="width:25%">الختام</div></div></div>
+              <div class="track"><div class="track-label"><b>T1</b> النص</div><div class="lane"><div class="clip textclip" style="width:26%">عنوان البداية</div><div class="clip textclip" style="width:47%">الترجمة</div><div class="clip textclip" style="width:17%">دعوة للمشاهدة</div></div></div>
+              <div class="track"><div class="track-label"><b>A1</b> الصوت</div><div class="lane"><div class="clip voice" style="width:84%">الصوت الرئيسي</div></div></div>
+              <div class="track"><div class="track-label"><b>+</b> إضافات</div><div class="lane"><div class="clip music" style="width:52%">موسيقى</div><div class="clip graphic" style="width:27%">جرافيك وخريطة</div></div></div>
+            </div>
+          </section>
+          <aside class="edit-panel" aria-label="أدوات التعديل">
+            <div class="panel-title">أدوات التعديل</div>
+            <div class="mode-tabs"><button class="is-active" data-mode="picture">الصورة</button><button data-mode="text">الكلام والنص</button><button data-mode="audio">الصوت</button><button data-mode="graphics">الجرافيك</button></div>
+            <div class="control-group" id="edit-controls"><h4>اللقطة المحددة</h4><div class="control-row"><span>استبدال اللقطة</span><span>اختيار من المكتبة</span></div><div class="control-row"><span>المدة</span><span>06.2 ثانية</span></div><div class="control-row"><span>الانتقال</span><span>قطع مباشر</span></div></div>
+            <div class="prompt-box"><label for="manual-request">طلب تعديل مكتوب</label><textarea id="manual-request" placeholder="مثال: بدّل لقطة الافتتاح بلقطة من مكتبتنا فيها نخيل…"></textarea><div class="prompt-foot"><button class="prompt-send" id="save-request">حفظ الطلب</button><span class="prompt-note">واجهة تجريبية فقط — لا يتم إرسال طلب أو تعديل فيديو فعلي.</span></div><div class="saved-note" id="saved-note"></div></div>
+          </aside>
+        </div>`;
+
+      const footer = doc.querySelector('footer.timeline');
+      if (footer) footer.style.display = 'none';
+      doc.querySelector('[data-p="review"]')?.click();
+      doc.querySelector('#save-request')?.addEventListener('click', () => {
+        doc.querySelector('#saved-note').textContent = 'تم حفظ طلبك داخل النموذج للعرض فقط.';
+      });
+      const modes = {
+        picture: ['اللقطة المحددة', ['استبدال اللقطة', 'اختيار من المكتبة'], ['المدة', '06.2 ثانية'], ['الانتقال', 'قطع مباشر']],
+        text: ['النص والترجمة', ['تعديل الكلمات', 'فتح النص'], ['الخط والحجم', 'العربية الحديثة'], ['الموضع', 'أسفل المنتصف']],
+        audio: ['الصوت الرئيسي', ['مستوى الصوت', '100%'], ['قص البداية والنهاية', 'تعديل'], ['استبدال المصدر', 'من المكتبة']],
+        graphics: ['الجرافيك والخريطة', ['إظهار العنصر', 'مفعّل'], ['استبدال العنصر', 'من المكتبة'], ['الحركة', 'ظهور هادئ']]
+      };
+      doc.querySelectorAll('[data-mode]').forEach(button => button.addEventListener('click', () => {
+        doc.querySelectorAll('[data-mode]').forEach(item => item.classList.remove('is-active'));
+        button.classList.add('is-active');
+        const [title, ...rows] = modes[button.dataset.mode];
+        doc.querySelector('#edit-controls').innerHTML = `<h4>${title}</h4>${rows.map(([label,value]) => `<div class="control-row"><span>${label}</span><span>${value}</span></div>`).join('')}`;
+      }));
+    };
+    frame.addEventListener('load', mountReview);
+    setTimeout(mountReview, 120);
+  </script>
+<script src="workflow.js"></script></body>
+</html>

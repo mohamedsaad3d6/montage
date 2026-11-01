@@ -1,0 +1,68 @@
+{
+  "whisper-large-v3-turbo": {
+    "repo": "ggerganov/whisper.cpp",
+    "revision": "main",
+    "dest": "whisper",
+    "licence": "MIT",
+    "for": "music vocals check; second opinion in accuracy tests",
+    "files": [
+      {
+        "path": "ggml-large-v3-turbo.bin",
+        "size": 1624555275,
+        "sha256": "1fc70f774d38eb169993ac391eea357ef47c88757ef72ee5943879b7e8e2bc69",
+        "url": "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v3-turbo.bin"
+      }
+    ]
+  },
+  "wav2vec2-egyptian": {
+    "repo": "IbrahimAmin/egyptian-arabic-wav2vec2-xlsr-53",
+    "revision": "c2ce8d4d8d548a21c6ea88d5506cb3cf4508a654",
+    "dest": "wav2vec2-egyptian",
+    "licence": "Apache-2.0",
+    "for": "literal Egyptian words for the pause and breath rules",
+    "files": [
+      {
+        "path": "added_tokens.json",
+        "size": 30,
+        "sha256": "23de837bff85e4dab599d27346e63eda2609b8089038608d06b21807114043da",
+        "url": "https://huggingface.co/IbrahimAmin/egyptian-arabic-wav2vec2-xlsr-53/resolve/c2ce8d4d8d548a21c6ea88d5506cb3cf4508a654/added_tokens.json"
+      },
+      {
+        "path": "config.json",
+        "size": 2108,
+        "sha256": "51ae5757435fa1a8d806eaa426f05b580b7d3db79da2c2277aaf744d6bae97a0",
+        "url": "https://huggingface.co/IbrahimAmin/egyptian-arabic-wav2vec2-xlsr-53/resolve/c2ce8d4d8d548a21c6ea88d5506cb3cf4508a654/config.json"
+      },
+      {
+        "path": "model.safetensors",
+        "size": 1261979588,
+        "sha256": "32d694bc610f9850d3ea4a1ef5de8fb27c49c333c015545715972b36f2432824",
+        "url": "https://huggingface.co/IbrahimAmin/egyptian-arabic-wav2vec2-xlsr-53/resolve/c2ce8d4d8d548a21c6ea88d5506cb3cf4508a654/model.safetensors"
+      },
+      {
+        "path": "preprocessor_config.json",
+        "size": 256,
+        "sha256": "ffc72f475cd79680d5d659fbaefc691cdbcee5c9703a15faf708a5e91452a8d8",
+        "url": "https://huggingface.co/IbrahimAmin/egyptian-arabic-wav2vec2-xlsr-53/resolve/c2ce8d4d8d548a21c6ea88d5506cb3cf4508a654/preprocessor_config.json"
+      },
+      {
+        "path": "special_tokens_map.json",
+        "size": 96,
+        "sha256": "f17f705b191ddb9aef0b42e40869d325d79b2a1e229e0d51d72698b5d3e4fc90",
+        "url": "https://huggingface.co/IbrahimAmin/egyptian-arabic-wav2vec2-xlsr-53/resolve/c2ce8d4d8d548a21c6ea88d5506cb3cf4508a654/special_tokens_map.json"
+      },
+      {
+        "path": "tokenizer_config.json",
+        "size": 1093,
+        "sha256": "aabd5bc606d6aed38104a0c17f7f9f18682cb6aec3dd2c1e6bb12055bb92e544",
+        "url": "https://huggingface.co/IbrahimAmin/egyptian-arabic-wav2vec2-xlsr-53/resolve/c2ce8d4d8d548a21c6ea88d5506cb3cf4508a654/tokenizer_config.json"
+      },
+      {
+        "path": "vocab.json",
+        "size": 491,
+        "sha256": "5249032aba7fc3c10f199a813fa5e45b779731e6d9bc7061c56e1f55c78f8aba",
+        "url": "https://huggingface.co/IbrahimAmin/egyptian-arabic-wav2vec2-xlsr-53/resolve/c2ce8d4d8d548a21c6ea88d5506cb3cf4508a654/vocab.json"
+      }
+    ]
+  }
+}

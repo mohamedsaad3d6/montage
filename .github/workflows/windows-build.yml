@@ -1,0 +1,42 @@
+name: Build Windows acceptance candidate
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: windows-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.15.0'
+      - name: Verify public source inventory
+        run: python packaging/check_bundle.py
+      - name: Install smoke test dependencies
+        run: python -m pip install psutil==7.2.2 numpy==1.26.4 scipy==1.13.1 pillow==11.2.1 rapidfuzz==3.13.0
+      - name: Test installer and portable process handling
+        run: python -m unittest discover -s packaging/tests -v
+      - name: Test local HTTP startup with isolated data
+        run: python packaging/windows_smoke.py
+      - name: Test scheduling and workflow state
+        shell: pwsh
+        run: |
+          $env:PYTHONPATH = "source/app-local;source/app-local/tests;source/engine"
+          $env:PYTHONUTF8 = "1"
+          python -m unittest test_dispatcher test_queue test_process_guard test_runtime_contract test_output_status test_workflow test_codex_agent test_codex_sources test_storyblocks_auto test_storyblocks_connector -v
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node --test source/app-local/tests/test-workflow-view.mjs source/app-local/tests/test-work-progress.mjs
+          exit $LASTEXITCODE
+      - name: Build executable
+        shell: cmd
+        run: packaging\build-windows.cmd
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Montaj-Windows-acceptance-candidate
+          path: dist/Montaj-Setup*
+          if-no-files-found: error

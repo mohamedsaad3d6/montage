@@ -1,0 +1,106 @@
+[
+  {
+    "id": "economy",
+    "title": "الاقتصاد والنمو",
+    "kind": "bars",
+    "type": "original_procedural_motion"
+  },
+  {
+    "id": "energy",
+    "title": "النفط والطاقة",
+    "kind": "energy",
+    "type": "original_procedural_motion"
+  },
+  {
+    "id": "trade",
+    "title": "التجارة العالمية",
+    "kind": "routes",
+    "type": "original_procedural_motion"
+  },
+  {
+    "id": "inflation",
+    "title": "التضخم والأسعار",
+    "kind": "curve",
+    "type": "original_procedural_motion"
+  },
+  {
+    "id": "diplomacy",
+    "title": "العلاقات الدولية",
+    "kind": "network",
+    "type": "original_procedural_motion"
+  },
+  {
+    "id": "policy",
+    "title": "اتخاذ القرار",
+    "kind": "policy",
+    "type": "original_procedural_motion"
+  },
+  {
+    "id": "saudi-map",
+    "title": "خريطة السعودية",
+    "kind": "map",
+    "view": "saudi",
+    "labels": [
+      [
+        "saudi",
+        "السعودية"
+      ],
+      [
+        "yemen",
+        "اليمن"
+      ],
+      [
+        "gulf",
+        "الخليج العربي"
+      ],
+      [
+        "redsea",
+        "البحر الأحمر"
+      ]
+    ]
+  },
+  {
+    "id": "redsea-map",
+    "title": "البحر الأحمر وباب المندب",
+    "kind": "map",
+    "view": "redsea",
+    "labels": [
+      [
+        "redsea",
+        "البحر الأحمر"
+      ],
+      [
+        "bab",
+        "باب المندب"
+      ],
+      [
+        "suez",
+        "قناة السويس"
+      ],
+      [
+        "yemen",
+        "اليمن"
+      ]
+    ]
+  },
+  {
+    "id": "hormuz-map",
+    "title": "مضيق هرمز",
+    "kind": "map",
+    "view": "hormuz",
+    "labels": [
+      [
+        "hormuz",
+        "مضيق هرمز"
+      ],
+      [
+        "iran",
+        "إيران"
+      ],
+      [
+        "musandam",
+        "مسندم — عُمان"
+      ]
+    ]
+  }
+]

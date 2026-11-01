@@ -1,0 +1,37 @@
+{
+ "note": "Example channel profile. Copy this folder OUTSIDE the engine, to AI agent/channels/<slug>/ (one folder per channel), put the channel's own files next to channel.json, and a project names it with \"profile\": \"<slug>\". Everything here stays the same from video to video (decision 10: logo, end screen, title card); everything else varies.",
+ "name": "Example channel",
+ "font": null,
+ "logo": "logo.png",
+ "logo_light": "logo_light.png",
+ "title_card": {
+  "logo": "logo_light.png",
+  "music": "own sting in the source sound (no added music)",
+  "seconds": 10.5
+ },
+ "end_screen": {
+  "seconds": 22,
+  "video_slots": 2,
+  "subscribe": true
+ },
+ "corner_overlays": [],
+ "promo_slot": {
+  "use": false,
+  "seconds": 12
+ },
+ "promo": null,
+ "disclosure": {
+  "altered_or_synthetic_content": "tick when a video has AI images or AI music"
+ },
+ "montage": {
+  "types": [
+   "presenter",
+   "audio"
+  ],
+  "materials": {
+   "flags_in_real_footage": true,
+   "brand_logos_in_real_footage": true
+  },
+  "note": "how this channel's videos are built (monteer/core/profile.py): today the engine reads types and materials; the other keys (format, presenter, structure, pace, logo, text, news, sound …) are recorded for later phases"
+ }
+}

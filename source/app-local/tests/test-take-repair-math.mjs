@@ -1,0 +1,2 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {secondsToFrame}from '../web/control/take-repair-math.mjs';
+test('Arabic decimal seconds quantize to actual video frames; blank is never a silent zero',()=>{assert.equal(secondsToFrame('٦٫٠٤٢',24),145);assert.equal(secondsToFrame('۰',24),0);assert.equal(secondsToFrame('0',24),0);for(const s of ['',null,'1e2','-1','NaN','4:20'])assert.throws(()=>secondsToFrame(s,24));assert.throws(()=>secondsToFrame('1',0))});

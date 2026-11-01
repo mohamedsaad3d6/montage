@@ -1,0 +1,14 @@
+/* The panel's own few rules on top of the design's stylesheet (logical properties only, so English mirrors). */
+.pv-grid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:24px;align-items:start}
+.pv-side{position:sticky;inset-block-start:16px}
+.pv-sec{margin-block:14px 6px}
+.ep{cursor:pointer;text-decoration:none;color:inherit}
+.ep .thumb{flex:none}
+.pv-log{direction:ltr;text-align:left;font-family:ui-monospace,Menlo,monospace;font-size:12px;line-height:1.6;white-space:pre-wrap;
+  background:var(--surface-2);border-radius:var(--radius-sm,10px);padding:12px;max-height:340px;overflow:auto;margin:10px 0 0}
+.pv-out{display:flex;gap:10px;align-items:center;padding:8px 0;border-block-start:1px solid var(--line)}
+.pv-out:first-child{border-block-start:0}
+.pv-out .name{direction:ltr;text-align:start;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0}
+.pv-note{margin-block-start:10px}
+.pv-err{color:var(--danger)}
+@media (max-width:1100px){.pv-grid{grid-template-columns:minmax(0,1fr)}.pv-side{position:static}}

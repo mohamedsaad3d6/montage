@@ -1,0 +1,9 @@
+{
+  "final_resolution": "source",
+  "preview_resolution": "720",
+  "final_quality_crf": 17,
+  "preview_quality_crf": 22,
+  "automatic_upscale": false,
+  "preserve_source_aspect_ratio": true,
+  "note": "Final export uses the native resolution of the primary raw video; preview settings never replace final settings. Upscaling does not recover detail."
+}
